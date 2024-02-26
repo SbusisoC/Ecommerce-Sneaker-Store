@@ -1,9 +1,10 @@
-package com.example.ecommerceapp;
+package com.example.ecommerceapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -11,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.ecommerceapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -23,6 +25,8 @@ public class RegisterActivity extends AppCompatActivity {
     EditText name, email, password;
     FirebaseAuth auth;
     ProgressBar progressBar;
+
+    SharedPreferences sharedPreferences;
 
     @Override
     public void onStart() {
@@ -47,6 +51,20 @@ public class RegisterActivity extends AppCompatActivity {
         name = findViewById(R.id.name);
         email = findViewById(R.id.email);
         password = findViewById(R.id.password);
+
+        sharedPreferences = getSharedPreferences("BoardingScreen", MODE_PRIVATE);
+
+        boolean isFirstTime = sharedPreferences.getBoolean("firstTime",true);
+
+        if(isFirstTime){
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("firstTime",false);
+            editor.commit();
+
+            Intent intent = new Intent(RegisterActivity.this, BoardingActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     public void signUp(View view) {

@@ -2,6 +2,7 @@ package com.example.ecommerceapp.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 import android.view.View;
@@ -32,6 +33,8 @@ public class DetailedActivity extends AppCompatActivity {
     Button addToCart, buyNow;
     ImageView addItems, removeItems;
 
+    Toolbar toolbar;
+
     int totalQuantity = 1;
     int totalPrice = 0;
 
@@ -49,6 +52,10 @@ public class DetailedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detailed);
+
+        toolbar = findViewById(R.id.detailed_toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fireStore = FirebaseFirestore.getInstance();
 
@@ -176,7 +183,7 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("currentTime",saveCurrentTime);
         cartMap.put("currentDate",saveCurrentDate);
         cartMap.put("totalQuantity",quantity.getText().toString());
-        cartMap.put("currentDate",totalPrice);
+        cartMap.put("totalPrice",totalPrice);
 
         fireStore.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("User").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

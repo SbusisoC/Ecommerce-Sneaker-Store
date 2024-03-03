@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="9dp"
-                        android:text="New Products"
+                        android:text="New Items"
                         android:textSize="21sp"
                         android:textStyle="bold" />
 
@@ -127,7 +127,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="9dp"
-                    android:text="Popular Products"
+                    android:text="Popular Items"
                     android:textSize="21sp"
                     android:textStyle="bold" />
 
